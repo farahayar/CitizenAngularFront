@@ -1,0 +1,149 @@
+#map {
+  height: 100%;
+  width: 100%;
+}
+.loader {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+  border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 5px solid #93d2d2;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+textarea {
+  height: 2em;
+  width: 100%;
+}
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.previous {
+  background-color: #93d2d2;
+  color: black;
+}
+.next {
+  background-color: #93d2d2;
+  color: white;
+}
+.round {
+  border-radius: 50%;
+}
+.xyz { 
+  background-size: auto; 
+  text-align: center; 
+  padding-top: 100px; 
+} 
+.btn-circle.btn-sm { 
+  width: 30px; 
+  height: 30px; 
+  padding: 6px 0px; 
+  border-radius: 15px; 
+  font-size: 8px; 
+  text-align: center; 
+} 
+.btn-circle.btn-md { 
+  width: 50px; 
+  height: 50px; 
+  padding: 7px 10px; 
+  border-radius: 25px; 
+  font-size: 10px; 
+  text-align: center; 
+} 
+.btn-circle.btn-xl { 
+  width: 70px; 
+  height: 70px; 
+  padding: 10px 16px; 
+  border-radius: 35px; 
+  font-size: 12px; 
+  text-align: center; 
+}
+#map-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+#map {
+    width: 100%;
+    height: 100%;
+}
+#button-wrapper {
+  margin-left: 10px;
+  z-index: 1005;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+#button-wrapper2 {
+  margin-left: 10px;
+  z-index: 1005;
+  position: absolute;
+  bottom: 10px;
+  width: 20%;
+  
+}
+#button-wrapper3{
+  left: 50px;
+  z-index: 1005;
+  position: absolute;
+  top: 20px;
+  width: 90%;
+   
+}
+::placeholder {
+  color: white;
+}
+.ui-widget{
+  z-index: 1001;
+  float: left;
+  margin:50px;
+}
+.ui-menu{
+  z-index: 1001 !important;
+}
+
+
+
+.btnStyle {
+  border-radius: 15px;
+background-color: #4D90FE; 
+background-image: -moz-linear-gradient(center top , #4D90FE, #4787ED); 
+border: 1px solid #3079ED; 
+color: #FFFFFF;
+padding: 4px;
+width:28%
+}
+
+.lblStyle {
+color: red;
+padding: 4px;
+width: 100%;
+font-weight: bold;
+}
+
+/* Important part */
+.modal-dialog{
+  overflow-y: initial !important
+}
+.modal-body{
+  height: 385px;
+  overflow-y: auto;
+}

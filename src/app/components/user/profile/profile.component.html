@@ -1,0 +1,539 @@
+<body class="">
+
+
+    <div id="backimage" class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+        style="min-height: 600px;  background-size: cover; background-position: center top;">
+        <!-- Mask -->
+        <span class="mask bg-gradient-default opacity-8"></span>
+        <!-- Header container -->
+        <div class="container-fluid d-flex align-items-center">
+            <div class="row">
+                <div class="col-lg-7 col-md-10">
+                    <h1 class="display-2 text-white">Hello {{pren}}</h1>
+                    <p class="text-white mt-0 mb-5">Ici c'est votre profilé vous y trouverez vos postes que de ceux que
+                        vous avez enregistrés.</p>
+                    <!-- <a href="#!" class="btn btn-info">Edit profile</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+        <div class="row">
+            <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                <div class="card card-profile shadow">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 order-lg-2">
+                            <div class="card-profile-image">
+                                <a>
+                                    <img [src]="imageUser" (click)="mdifModal()" class="rounded-circle">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                        <div class="d-flex justify-content-between" style="color: white;">
+                            <button id="bshowmodif" (click)="showmodifProf()"
+                                class="btn btn-sm btn-info mr-4">Modifier</button>
+                            <button id="bhidemodif" (click)="hidemodifProf()"
+                                class="btn btn-sm btn-info mr-4">gallery</button>
+                            <!-- <a href="#" class="btn btn-sm btn-default float-right">Message</a> -->
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pt-md-4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                    <div (click)="listAbonne()">
+                                        <span class="heading">{{nbAbonements}}</span>
+                                        <span class="description">Abonné à</span>
+                                    </div>
+                                    <div>
+                                        <span class="heading">{{nbPosts}}</span>
+                                        <span class="description">Posts</span>
+                                    </div>
+                                    <div (click)="suiviAbonne()">
+                                        <span class="heading">{{nbSuivits}}</span>
+                                        <span class="description">Suivit par</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h3>
+                                {{nomUser}}<span class="font-weight-light">, {{age}}ans</span>
+                            </h3>
+                            <div class="h5 font-weight-300">
+                                <i class="ni location_pin mr-2"></i>{{adresse}}
+                            </div>
+                            <div class="h5 mt-4">
+                                <i class="ni business_briefcase-24 mr-2"></i>{{email}}
+                            </div>
+                            <div>
+                                <i class="ni education_hat mr-2"></i>{{tel}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8 order-xl-1">
+                <div class="card bg-secondary shadow">
+                    <div id="modifProf" class="card-body">
+                        <form>
+                            <h6 class="heading-small text-muted mb-4">Informations de l'utilisateur</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="nomM">Nom</label>
+                                            <input type="text" id="nomM" class="form-control form-control-alternative"
+                                                placeholder="Nom">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="prenomM">Prenom</label>
+                                            <input type="text" id="prenomM"
+                                                class="form-control form-control-alternative" placeholder="Prenom">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="addemailM">Adresse email</label>
+                                            <input type="email" id="addemailM"
+                                                class="form-control form-control-alternative"
+                                                placeholder="Adresse email">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="dattnaissM">Date de naissance</label>
+                                            <input type="date" id="dattnaissM"
+                                                class="form-control form-control-alternative">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4" />
+                            <!-- Address -->
+                            <h6 class="heading-small text-muted mb-4">Informations de contact</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="adresseM">Adresse</label>
+                                            <input id="adresseM" class="form-control form-control-alternative"
+                                                placeholder="Home Address" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="telM">Numéro de téléphoen</label>
+                                            <input type="text" id="telM" class="form-control form-control-alternative"
+                                                placeholder="(+216)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4" />
+                            <!-- Mot de passe -->
+                            <h6 class="heading-small text-muted mb-4">Mos de passe</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="motDePasseM">Mod de passe</label>
+                                            <input type="password" id="motDePasseM"
+                                                class="form-control form-control-alternative"
+                                                placeholder="Mod de passe">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="reMotDePasseM">Resaisir mod de
+                                                passe</label>
+                                            <input type="password" id="reMotDePasseM"
+                                                class="form-control form-control-alternative"
+                                                placeholder="Resaisir mod de passe">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4" />
+                            
+                            <div class="col-4 text-right" style="color: white;float: right;">
+                                <button class="btn btn-sm btn-primary" (click)="modifProfile()">Modifier</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-header bg-white border-0">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h3 id="titrePosts" class="mb-0">Mes posts</h3>
+                                <h3 id="titreEnregs" class="mb-0">Mes enregistremet</h3>
+                            </div>
+                            <div class="col-4 text-right" style="color: white;">
+                                <button id="bposts" (click)="showenregistrer()" class="btn btn-sm btn-primary">Aller
+                                    vers
+                                    enregistrements</button>
+                                <button id="benregistrers" (click)="hideenregistrer()"
+                                    class="btn btn-sm btn-primary">Aller
+                                    vers mes posts</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="gallery" class="card-body">
+                        <div class="row">
+                            <div class="col-md-4" *ngFor="let p of userPosts;">
+                                <div class="thumbnail">
+                                    <img [src]="p.post_id.imageP" (click)="openModel(p.post_id.id)" alt="ImagePost"
+                                        style="width:100%">
+                                    <div class="caption">
+                                        <p>{{p.post_id.titre}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="enregistrer" class="card-body">
+                        <div class="row">
+                            <div class="col-md-4" *ngFor="let p of enregitrerPosts;">
+                                <div class="thumbnail">
+                                    <img [src]="p.post_id.imageP" (click)="openModelSaved(p.post_id.id)" alt="Lights"
+                                        style="width:100%">
+                                    <div class="caption">
+                                        <p>{{p.post_id.titre}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Footer -->
+        <footer class="footer">
+
+        </footer>
+    </div>
+
+    <!-- consulter -->
+    <div class="modal fade" id="consulter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #93d2d2;">
+                    <table>
+                        <td><img id="imageUser" src="" alt="Avatar" class="avatar" style="
+                        vertical-align: middle;
+                        width: 75px;
+                        height: 75px;
+                        border-radius: 50%;
+                        box-shadow: 0px 15px 16.83px 0.17px #93d2d2;
+                      "></td>
+                        <td>&nbsp;&nbsp;</td>
+                        <td>
+                            <h5 class="modal-title" id="username"></h5>
+                        </td>
+                    </table>
+                    <button type="button" class="close" (click)="close()" data-dismiss="modal"
+                        style="float: inline-end;">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="signup-image">
+
+                        <figure>
+                            <div class="text-center">
+                                <div class="loader" id="loader"></div>
+                            </div>
+                            <p class="blockquote text-center" id="titreP"></p>
+                            <img id="imageP" src="" style="
+                            width: 445px;
+                            height: 300px;">
+                        </figure>
+                        <a class="region-image-link" id="regionP"></a>
+                    </div>
+
+                    <h2 class="form-title" style="border-bottom:1px solid #93d2d2;">Description</h2>
+                    <!-- <p style="border-bottom:1px solid black;"></p> -->
+                    <div class="form-group" id="descriptionP">
+                        <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                    </div>
+                    <p class="form-title" style="border-bottom:1px solid #93d2d2;">Cette description ne vous paniquez
+                        pas
+                        satisfaisantes vous vouller la modifier? </p>
+                    <textarea id="novDescription" placeholder="Taper içi votre nouvelle description"></textarea>
+
+
+                </div>
+                <div class="modal-footer">
+                    <table>
+                        <td><button type="button" class="btn btn-outline-primary"
+                                (click)="affirmerModif()">Modifier</button></td>
+                        <td><button type="button" class="btn btn-outline-danger" (click)="openModalSupprimer2()">
+                                <i class="fa fa-trash-o fa-lg"></i> Supprimer</button></td>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Consulter posts enregistrer  -->
+    <div class="modal" id="consulterEnregistrer">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #93d2d2;">
+                    <table>
+                        <td><img id="imageUserS" (click)='goToUserProfile()' src="" alt="Avatar" class="avatar" style="
+                        vertical-align: middle;
+                        width: 75px;
+                        height: 75px;
+                        border-radius: 50%;
+                        box-shadow: 0px 15px 16.83px 0.17px #93d2d2;
+                      "></td>
+                        <td>&nbsp;&nbsp;</td>
+                        <td>
+                            <h5 class="modal-title" id="usernameS" (click)='goToUserProfile()'></h5>
+                        </td>
+                    </table>
+                    <button type="button" class="close" data-dismiss="modal" style="float: inline-end;">&times;</button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="signup-image">
+                        <figure>
+                            <div class="text-center">
+                                <div class="loader" id="loader"></div>
+                            </div>
+                            <p class="blockquote text-center" id="titrePS"></p>
+                            <img id="imagePS" src="" style="
+                            width: 445px;
+                            height: 300px;">
+                        </figure>
+                        <a class="region-image-link" id="regionPS"></a>
+                    </div>
+
+                    <h2 class="form-title" style="border-bottom:1px solid #93d2d2;">Description</h2>
+                    <!-- <p style="border-bottom:1px solid black;"></p> -->
+                    <div class="form-group" id="descriptionPS">
+                        <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                    </div>
+                    <p class="form-title" style="border-bottom:1px solid #93d2d2;">Cette description ne vous paniquez
+                        pas
+                        satisfaisantes vous vouller la modifier? </p>
+                    <textarea id="novDescription" placeholder="Taper içi votre nouvelle description"></textarea>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" (click)="affirmerModif()">Modifier</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="supprimerPostEnregistrer()">
+                        <i class="fa fa-trash-o fa-lg"></i> Supprimer des enregistrements</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal affirmer modification  -->
+    <div class="modal fade" id="modif" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <h6 style="text-align: center;" id="messageModif"></h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="mod" class="btn btn-outline-success"
+                        (click)="modifier()">Modifier</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade " id="modifModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input id="inputmodfif" type="file" class="custom-file-input" id="inputGroupFile01"
+                            aria-describedby="inputGroupFileAddon01" id="img" name="img" accept="image/*"
+                            (change)=" onFileSelected($event)">
+                        <label class="custom-file-label" for="inputGroupFile01">Choisir votre image</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        (click)="modifierImageUser()">Modifier</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- confirme supprimer -->
+
+    <!--Modal: modalConfirmDelete-->
+    <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+                <!--Header-->
+                <div class="modal-header d-flex justify-content-center">
+                    <p class="heading">Êtes-vous sûr ?</p>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body">
+
+                    <i class="fa fa-times fa-4x animated rotateIn"></i>
+
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer flex-center">
+                    <a href="" class="btn  btn-outline-danger" (click)="supprimerPostEnregistrer()">Oui</a>
+                    <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Non</a>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!--Modal: modalConfirmDelete-->
+
+
+
+    <!-- confirme supprimer -->
+
+    <!--Modal: modalConfirmDelete-->
+    <div class="modal fade" id="modalConfirmDelete2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+                <!--Header-->
+                <div class="modal-header d-flex justify-content-center">
+                    <p class="heading">Are you sure?</p>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body">
+
+                    <i class="fa fa-times fa-4x animated rotateIn"></i>
+
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer flex-center">
+                    <a  class="btn  btn-outline-danger" (click)="supprimerPost()">Yes</a>
+                    <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!--Modal: modalConfirmDelete-->
+
+
+    <div class="modal" id="consulterListeAbonne">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header" style="height: 2px;">
+                    <button type="button" class="close" data-dismiss="modal" style="float: inline-end;">&times;</button>
+                </div>
+                <div class="padding">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="list list-row block" *ngFor="let a of listeAbonne;">
+                                <div class="list-item" data-id="19">
+                                    <div>
+                                        <a (click)='goToUserProfile2(a.id)' data-abc="true">
+                                            <img [src]="a.img" class="w-48 avatar gd-warning">
+                                            <!-- </span> -->
+                                        </a>
+                                    </div>
+                                    <div class="flex">
+                                        <a (click)='goToUserProfile2(a.id)' href class="item-author text-color"
+                                            data-abc="true">
+                                            {{a.prenom}}{{a.nom}}
+                                        </a>
+                                    </div>
+                                    <div class="no-wrap">
+                                        <div class="item-date text-muted text-sm d-none d-md-block"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+    </div>
+
+    <!-- modal abonnee -->
+
+    <!-- fin list abonnee -->
+
+
+
+    <!-- modal suivi -->
+    <div class="modal" id="consulterSuiviAbonne">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header" style="height: 2px;">
+                    <button type="button" class="close" data-dismiss="modal" style="float: inline-end;">&times;</button>
+                </div>
+                <div class="padding">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="list list-row block" *ngFor="let a of suivisAbonne;">
+                                <div class="list-item" data-id="19">
+                                    <div>
+                                        <a (click)='goToUserProfile2(a.id)' data-abc="true">
+                                            <img [src]="a.img" class="w-48 avatar gd-warning">
+                                            <!-- </span> -->
+                                        </a>
+                                    </div>
+                                    <div class="flex">
+                                        <a (click)='goToUserProfile2(a.id)' href class="item-author text-color"
+                                            data-abc="true">
+                                            {{a.prenom}}{{a.nom}}
+                                        </a>
+                                    </div>
+                                    <div class="no-wrap">
+                                        <div class="item-date text-muted text-sm d-none d-md-block"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+    </div>
+
+    <!-- fin list suivit -->
+</body>

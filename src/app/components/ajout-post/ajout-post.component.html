@@ -1,0 +1,68 @@
+<div class="wrapper">
+    <div class="inner">
+        <img src="../../../assets/AjoutPostTemplate/images/image-1.png" alt="" class="image-1">
+        <form name="ajoutPost" [formGroup]="ajoutPostForm" (ngSubmit)="ajoutPost()">
+            <h3>Nouvelle découverte?</h3>
+
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" id="img" name="img" formControlName="img" accept="image/*" (change)=" onFileSelected($event)">
+                    <label class="custom-file-label" for="inputGroupFile01">Choisir votre image</label>
+                </div>
+            </div>
+
+            <div class="form-holder">
+
+                <button data-toggle="modal" (click)="openmap()">Chercher dans la map
+
+				</button>
+
+                <input type="text" class="form-control" name="coordonnees" id="coordonnees">
+
+            </div>
+
+            <div class="form-holder">
+                <span class="lnr "></span>
+                <input type="text" class="form-control" id="titreP" name="titreP" placeholder="Titre" formControlName="titreP" />
+            </div>
+
+            <div class="form-holder">
+                <span class="lnr "></span>
+                <textarea type="text" class="form-control" id="descriptionP" name="descriptionP" placeholder="Description" formControlName="descriptionP"></textarea>
+            </div>
+            <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="signe" name="signe" (change)="FieldsChange($event)" formControlName="signe" />
+                <label class="custom-control-label" id="labsigne" for="signe"></label>
+            </div>
+
+            <button type="submit" class="contact100-form-btn">
+				<span>
+					Ajouter
+					<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+				</span>
+			</button>
+        </form>
+        <img src="../../../assets/AjoutPostTemplate/images/image-2.png" alt="" class="image-2">
+    </div>
+
+
+</div>
+<div class="modal fade " id="mapajout" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chercher dans la map</h5>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button> -->
+            </div>
+            <div class="modal-body">
+                <div id="map" leaflet (leafletMapReady)="onMapReady($event)" [leafletOptions]="mapOptions"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closem()">J'ai terminé</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>

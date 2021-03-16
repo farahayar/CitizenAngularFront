@@ -1,0 +1,10 @@
+hedha aka lcomposer aka kima wa9tha 5demna bih nhabtouh kima lnpm yodhhorli yani howa eli bech ymeani lfazet
+lahdha nchouf win sabou felvid aa ay blasa chouf win tsobou 
+samih chiraz maw citezen behi
+chiraz asmani lezm nbadloufi esmou elprojet eli tawa mlneh ala5ter fama melou des erreurs 5arjou gadhom dah narch alih chaml donc npushiw leprojet eli gadou howa 5ir wala nkamlou tawa njarbou w kn kol chay cv ahwka npushiw hedha 
+tsaref farah enti fhemet wenti ta3ref ena mana3ref chay tawa haw eli narfou bech twali tarfou 
+behi tawa chneya bech namlou rit howa tawa projet laravel bech nsobou fih haja esmha passport lhaja hedhi eli bech t5alina namlou aka les api ya3i les services kima login w kol bshoula
+5anjarb nafser hne 
+behi hedha eli amlneha :composer require laravel/passport bech tsob passport hedhi eli 9otlk bech t5alina namlou login w....
+bech ryt aka behi asmani nab3athlek message vocale? behii 
+hasitou 9as narch alech

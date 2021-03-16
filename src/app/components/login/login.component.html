@@ -1,0 +1,78 @@
+<body>
+    <div style="background-color: black;">
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100">
+                    <form class="login100-form validate-form" [formGroup]="loginUserForm" (ngSubmit)="login()">
+                        <span class="login100-form-title p-b-34">
+                            Se connecter
+                        </span>
+
+                        <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Type user name">
+                            <input id="first-name" class="input100" type="text" id="email" name="email" placeholder="Email" formControlName="email" required>
+                            <span class="focus-input100"></span>
+                        </div>
+
+
+                        <div class="wrap-input100 rs2-wrap-input100 validate-input m-b-20" data-validate="Type password">
+                            <input class="input100" type="password" id="motDePasse" name="motDePasse" placeholder="Mot de passe" formControlName="motDePass" required>
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div class="contact100-form-checkbox">
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" formControlName="remember_me" name="remember-me">
+                            <label class="label-checkbox100" for="ckb1">
+                                Remember me
+                            </label>
+                            <br>
+                        </div>
+
+
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn" type="submit">
+                                Sign in
+                            </button>
+                        </div>
+
+                        <div class="w-full text-center p-t-27 p-b-239">
+                            <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+                                <div *ngIf="email.errors.required">
+                                    l'email est obligatoire !
+                                </div>
+                                <div *ngIf="email.errors.email">
+                                    l'email est invalid !
+                                </div>
+                            </div>
+                            <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+                            <div class="alert alert-warning" *ngIf="motDePass.touched && motDePass.invalid">
+                                <div *ngIf="motDePass.errors.required">
+                                    le mot de passe est obligatoire
+                                </div>
+                                <div *ngIf="motDePass.errors.minlength">min 4!</div>
+                            </div>
+                            <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+                        </div>
+
+                        <div class="w-full text-center">
+                            <a (click)="goToInscription()" class="txt3">
+                                Inscription
+                            </a>
+                        </div>
+                    </form>
+
+                    <div class="login100-more" (mouseover)="over()" (mouseout)="out()" (click)="goToMap()">
+                        <div class="text-center">
+                            <div class="jumbotron vertical-center" style="background-image: url('../../../../assets/LoginTemplate/images/bg-01.jpg');opacity: 0.7;">
+
+                                <h1 style="color:blanchedalmond;text-align: center;text-decoration-thickness: 20;">
+                                    &nbsp; Go to Map</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>

@@ -1,0 +1,136 @@
+<div class="wrapper d-flex align-items-stretch">
+    <nav *ngIf="isLoggedIn" id="sidebar"
+        style="background-image: url(../../../../assets/SidebarTemplate/images/bg_2.jpg);">
+
+        <div class="img bg-wrap text-center py-4">
+            <div class="user-logo">
+                <div class="img" (click)="goToProfile()">
+                    <img [src]="ImageUser" class="img" />
+                </div>
+                <h3>{{UserName}}</h3>
+            </div>
+        </div>
+        <ul class="list-unstyled components mb-5">
+            <li class="active">
+                <a (click)="goToHome()"><span class="fa fa-home mr-3"></span> Home</a>
+            </li>
+            <li>
+                <a (click)="goToProfile()"><span class="fa fa-user mr-3"></span> Profile</a>
+            </li>
+            <li>
+                <a (click)="goToAjouPost()"><span class="fa fa-plus mr-3"></span>Ajouter un point d'intérêt</a>
+            </li>
+            <li>
+                <a (click)="goToPosts()"><span class="fa fa-book mr-3"></span> Posts</a>
+            </li>
+            <li *ngIf="isLoggedAdmin">
+                <a (click)="goToAdmin()"><span class="fa fa-user mr-3"></span> Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="getnofis()">
+                    <i class="fa fa-bell">
+                        <span id="nbnots" class="badge badge-danger">{{nbNotif}}</span>
+                    </i>
+                    Notifications
+                </a>
+            </li>
+
+            <li>
+                <a (click)="logout()"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+            </li>
+        </ul>
+
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<!-- notification -->
+<div class="modal" id="notifs">
+    <div class="modal-dialog ">
+        <div class="modal-content" style="width: 350px;">
+            <div class="modal-header" style="background-color: #93d2d2;">
+                <h5 class="modal-title">Notifications</h5>
+                <button type="button" class="close" (click)="close()" data-dismiss="modal"
+                    style="float: inline-end;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="nofis.length > 0;then nofisAff else noNofis"></div>
+                <ng-template #noNofis>
+                    <div class="alert alert-warning">Pas de Notifications</div>
+                </ng-template>
+
+                <ng-template #nofisAff>
+
+                    <div class="padding">
+                        <div>
+                            <div class="list list-row block" *ngFor="let n of nofis;let i=index">
+                                <div class="list-item" data-id="19">
+                                    <div id="toNotif" (click)="gotToNotif(n)">
+                                        <a class="item-author text-color" data-abc="true">
+                                            {{i+1}} : {{n.notification}}
+                                        </a>
+                                        <br>
+                                        <hr class="style2">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Consulter post notif -->
+<div class="modal" id="consulterPostNotif">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #93d2d2;">
+                <table>
+                    <td><img id="imageUserN" (click)='goToUserProfile()' src="" alt="Avatar" class="avatar" style="
+                    vertical-align: middle;
+                    width: 75px;
+                    height: 75px;
+                    border-radius: 50%;
+                    box-shadow: 0px 15px 16.83px 0.17px #93d2d2;
+                  "></td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td>
+                        <h5 class="modal-title" id="usernameN"></h5>
+                    </td>
+                </table>
+                <button type="button" class="close" (click)="close()" data-dismiss="modal"
+                    style="float: inline-end;">&times;</button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="signup-image">
+                    <figure>
+                        <div class="text-center">
+                            <div class="loader" id="loaderN"></div>
+                        </div>
+                        <p class="blockquote text-center" id="titrePN"></p>
+                        <img id="imagePN" src="" style="
+                        width: 445px;
+                        height: 300px;">
+                    </figure>
+                    <a class="region-image-link" id="regionPN"></a>
+                </div>
+
+                <h2 class="form-title" style="border-bottom:1px solid #93d2d2;">Description</h2>
+                <div class="form-group" id="descriptionPN">
+                    <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

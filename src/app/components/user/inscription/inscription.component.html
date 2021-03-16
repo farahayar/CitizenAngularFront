@@ -1,0 +1,156 @@
+<head>
+    <title>Inscription</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+    <div class="container-contact100">
+        <div class="contact100-map" style="background:url(../../assets/mapp.jpg) 0 0 no-repeat;
+    opacity:0.3;background-size: 100% 100%;"></div>
+
+        <div class="wrap-contact100">
+            <div class="contact100-form-title" style="background-image:url('../../assets/bg-01.jpg')">
+                <span class="contact100-form-title-1">
+          Inscription
+        </span>
+            </div>
+
+            <form name="inscrit" class="contact100-form validate-form" [formGroup]="inscriptionUserForm" (ngSubmit)="inscription()" enctype="multipart/form-data">
+                <div class="wrap-input100">
+                    <span class="label-input100">Nom:</span>
+                    <input class="input100" type="text" id="nom" name="nom" placeholder="Entrer votre nom" formControlName="nom" ng-model="user." required />
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="alert alert-warning" *ngIf="nom.touched && nom.invalid">
+                    <div *ngIf="nom.errors.required">le nom est obligatoire</div>
+                    <div *ngIf="nom.errors.minlength">min 2!</div>
+                </div>
+                <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+                <div class="wrap-input100">
+                    <span class="label-input100">Prénom:</span>
+                    <input class="input100" type="text" id="prenom" name="prenom" placeholder="Entrer votre prenom" formControlName="prenom" required />
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="alert alert-warning" *ngIf="prenom.touched && prenom.invalid">
+                    <div *ngIf="prenom.errors.required">le prenom est obligatoire</div>
+                    <div *ngIf="prenom.errors.minlength">min 2!</div>
+                </div>
+                <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+
+                <div class="wrap-input100">
+                    <span class="label-input100">Date de naissance:</span>
+                    <input class="input100" type="date" id="dateNaiss" name="dateNaiss" placeholder="Entrer votre Date de naissance" formControlName="dateNaiss" required />
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="alert alert-warning" *ngIf="dateNaiss.touched && dateNaiss.invalid">
+                    <div *ngIf="dateNaiss.errors.required">le Date de naissance est obligatoire</div>
+                </div>
+                <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+
+                <div class="wrap-input100">
+                    <span class="label-input100">Adresse:</span>
+                    <input class="input100" type="text" id="adresse" name="adresse" placeholder="Entrer votre adresse" formControlName="adresse" required />
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="alert alert-warning" *ngIf="adresse.touched && adresse.invalid">
+                    <div *ngIf="adresse.errors.required">le adresse est obligatoire</div>
+                </div>
+                <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+
+                <div class="wrap-input100">
+                    <span class="label-input100">CIN:</span>
+                    <input class="input100" type="number" id="cin" name="cin" placeholder="Entrer votre cin" formControlName="cin" required />
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="alert alert-warning" *ngIf="cin.touched && cin.invalid">
+                    <div *ngIf="cin.errors.required">le cin est obligatoire</div>
+                    <div *ngIf="cin.errors.minlength">min 8!</div>
+                    <div *ngIf="cin.errors.maxlength">max 8!</div>
+                </div>
+                <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+
+                <div class="wrap-input100">
+                    <span class="label-input100">Téléphone:</span>
+                    <input class="input100" type="number" id="tel" name="tel" placeholder="Entrer votre Téléphone" formControlName="tel" required />
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="alert alert-warning" *ngIf="tel.touched && tel.invalid">
+                    <div *ngIf="tel.errors.required">
+                        le numéro de telephone est obligatoire !
+                    </div>
+                    <div *ngIf="tel.errors.pattern">
+                        le numéro de telephone invalid!
+                    </div>
+                    <div *ngIf="tel.errors.minlength">
+                        min 8 chif !
+                    </div>
+                </div>
+                <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+
+                <div class="wrap-input100">
+                    <span class="label-input100">E-mail:</span>
+                    <input class="input100" type="text" id="email" name="email" placeholder="Entrer votre email" formControlName="email" required />
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="alert alert-danger" *ngIf="email.touched && email.invalid">
+                    <div *ngIf="email.errors.required">
+                        l'email est obligatoire !
+                    </div>
+                    <div *ngIf="email.errors.email">
+                        l'email est invalid !
+                    </div>
+                </div>
+                <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+
+
+                <div class="wrap-input100">
+                    <span class="label-input100">Mot de passe:</span>
+                    <input class="input100" type="password" id="motDePasse" name="motDePasse" placeholder="Entrer votre Mot de passe" formControlName="motDePasse" required />
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="alert alert-warning" *ngIf="motDePasse.touched && motDePasse.invalid">
+                    <div *ngIf="motDePasse.errors.required">
+                        le mot de passe est obligatoire
+                    </div>
+                    <div *ngIf="motDePasse.errors.minlength">min 4!</div>
+                </div>
+                <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+
+                <div class="wrap-input100">
+                    <span class="label-input100">Confirmer mot de passe:</span>
+                    <input class="input100" type="password" id="ReMotDePasse" name="ReMotDePasse" placeholder="Entrer votre Mot de passe" formControlName="ReMotDePasse" required />
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="alert alert-warning" *ngIf="ReMotDePasse.touched && ReMotDePasse.invalid">
+                    <div *ngIf="ReMotDePasse.errors.required">
+                        le mot de passe est obligatoire
+                    </div>
+                    <div *ngIf="ReMotDePasse.errors.minlength">min 4!</div>
+                </div>
+                <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+
+                <div class="wrap-input100">
+                    <span class="label-input100">Image:</span>
+                    <input class="input100" type="file" id="img" name="img" placeholder="Entrer votre Image" formControlName="img" accept="image/*" (change)=" onFileSelected($event)" required />
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="alert alert-warning" *ngIf="img.touched && img.invalid">
+                    <div *ngIf="img.errors.required">
+                        l'image est obligatoire
+                    </div>
+                </div>
+                <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+
+                <div class="container-contact100-form-btn">
+                    <button type="submit" class="contact100-form-btn">
+            <span>
+              Inscrire
+              <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+            </span>
+          </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

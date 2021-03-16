@@ -1,0 +1,165 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "Citizen": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/Citizen",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "./node_modules/leaflet/dist/images",
+                "output": "leaflet/"
+              },
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss",
+              "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css",
+              "node_modules/leaflet.markercluster/dist/MarkerCluster.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.css",
+              "./node_modules/ngx-toastr/toastr.css",
+              "./node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css",
+              "src/assets/inscrptionTemplate/css/main.css",
+              "src/assets/inscrptionTemplate/css/util.css",
+              "src/assets/inscrptionTemplate/vendor/daterangepicker/daterangepicker.css",
+              "src/assets/inscrptionTemplate/vendor/select2/select2.min.css",
+              "src/assets/inscrptionTemplate/vendor/css-hamburgers/hamburgers.min.css",
+              "src/assets/inscrptionTemplate/fonts/Linearicons-Free-v1.0.0/icon-font.min.css",
+              "./node_modules/font-awesome/css/font-awesome.css",
+              "src/assets/AjoutPostTemplate/fonts/linearicons/style.css",
+              "./node_modules/leaflet/dist/leaflet.css",
+              "src/assets/dist/bootstrap-datepicker/bootstrap-datepicker.min.css",
+              "src/assets/dist/jquery-ui/themes/base/jquery-ui.min.css"
+            ],
+            "scripts": [
+              "node_modules/leaflet.markercluster/dist/leaflet.markercluster.js",
+              "src/assets/dist/jquery/dist/jquery.min.js",
+              "src/assets/dist/jquery-ui/jquery-ui.min.js",
+              "src/assets/dist/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/AjoutPostTemplate/js/main.js",
+              "src/assets/sideMenuScript/script.js",
+              "src/assets/dist/bootstrap-datepicker/bootstrap-datepicker.min.js",
+              "src/assets/SidebarTemplate/js/popper.js",
+              "src/assets/SidebarTemplate/js/main.js",
+              "src/assets/ValidePostTemplate/js/jquery.dataTables.min.js",
+              "src/assets/ValidePostTemplate/js/dataTables.bootstrap4.min.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "Citizen:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "Citizen:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "Citizen:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              "src/firebase-messaging-sw.js",
+              "src/manifest.json"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "Citizen:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "Citizen:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "Citizen"
+}

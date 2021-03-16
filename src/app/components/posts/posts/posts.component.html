@@ -1,0 +1,286 @@
+<app-nav-visiteur *ngIf="!isLoggedIn"></app-nav-visiteur>
+<body class="">
+
+
+    <div id="backimage" class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+        style="min-height: 50px;  background-size: cover; background-position: center top;">
+        <!-- Mask -->
+        <span class="mask bg-gradient-default opacity-8"></span>
+        <!-- Header container -->
+        <div class="container-fluid d-flex align-items-center">
+            <div class="row">
+                <div class="col-lg-7 col-md-10">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--9">
+
+
+        <div class="">
+            <div class="card bg-secondary shadow">
+
+                <div class="card-header bg-white border-0">
+                    <div class="row align-items-center">
+                        <div class="col-8">
+                            <h3 class="mb-0">Tous les post</h3>
+                        </div>
+                        <div class="col-4 text-right">
+                            <button (click)="goToMap()" class="btn btn-primary">Visiter la map</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="gallery">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="hovereffect" *ngFor="let p of userPosts;">
+                            <div (click)="openModel(p.id)">
+                                <img class="img-responsive rounded-top rounded-bottom" [src]="p.imageP"
+                                    alt="ImagePost" />
+                                <div class="overlay">
+                                    <h2>{{p.titre}}</h2>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <footer class="footer">
+
+        </footer>
+    </div>
+
+    <!-- consulter -->
+    <div class="modal fade" id="consulter">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #93d2d2;">
+                    <table>
+                        <td><img id="imageUser" (click)='goToUserProfile()' src="" alt="Avatar" class="avatar" style="
+                        vertical-align: middle;
+                        width: 75px;
+                        height: 75px;
+                        border-radius: 50%;
+                        box-shadow: 0px 15px 16.83px 0.17px #93d2d2;
+                      "></td>
+                        <td>&nbsp;&nbsp;</td>
+                        <td>
+                            <h5 class="modal-title" id="username"></h5>
+                        </td>
+                    </table>
+                    <button type="button" class="close" (click)="close()" data-dismiss="modal"
+                        style="float: inline-end;">&times;</button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="signup-image">
+                        <p class="blockquote text-center" id="titreP"></p>
+                        <figure>
+                            <div class="text-center">
+                                <div class="loader" id="loader"></div>
+                            </div>
+                            <img id="imageP" src="" style="
+                            width: 445px;
+                            height: 300px;">
+                        </figure>
+                        <a class="region-image-link" id="regionP"></a>
+                    </div>
+
+                    <h2 class="form-title" style="border-bottom:1px solid #93d2d2;">Description</h2>
+                    <!-- <p style="border-bottom:1px solid black;"></p> -->
+                    <div class="form-group" id="descriptionP">
+                        <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                    </div>
+                    <p *ngIf="isLoggedIn" class="form-title" style="border-bottom:1px solid #93d2d2;">Cette description ne vous parait
+                        pas
+                        satisfaisantes vous vouller la modifier? </p>
+                    <textarea *ngIf="isLoggedIn" id="novDescription" placeholder="Taper içi votre nouvelle description"></textarea>
+
+
+                </div>
+                <div class="modal-footer" *ngIf="isLoggedIn">
+                    <table>
+                        <td><button type="button" class="btn btn-outline-success"
+                            (click)="enregistrerPost()">Enregister</button></td>
+                        <td><button type="button" class="btn btn-outline-warning"
+                            (click)="affirmerModif()">Modifier</button></td>
+                        <td>  <button type="button" class="btn btn-outline-danger"
+                            (click)="openModalSignaler()">Signaler</button></td>
+                        <td><button type="button" class="btn btn-outline-primary" data-dismiss="modal"
+                            (click)="close()">Fermer</button></td>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal affirmer modification  -->
+    <div class="modal fade" id="modif" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <h6 style="text-align: center;" id="messageModif"></h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="mod" class="btn btn-outline-success"
+                        (click)="modifier()">Modifier</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal" id="consulter">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #93d2d2;">
+                    <img id="imageUser" src="" alt="Avatar" class="avatar" style="
+                    vertical-align: middle;
+                    width: 75px;
+                    height: 75px;
+                    border-radius: 50%;
+                    box-shadow: 0px 15px 16.83px 0.17px #93d2d2;
+                  ">
+                    <h5 class="modal-title" id="username"></h5>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="signup-image">
+                        <figure>
+                            <div class="text-center">
+                                <div class="loader" id="loader"></div>
+                            </div>
+                            <img id="imageP" src="" style="
+                        width: 445px;
+                        height: 300px;">
+                        </figure>
+                        <a class="region-image-link" id="regionP"></a>
+                    </div>
+
+                    <h2 class="form-title" style="border-bottom:1px solid #93d2d2;">Description</h2>
+                    <!-- <p style="border-bottom:1px solid black;"></p> -->
+                    <div class="form-group" id="descriptionP">
+                        <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                    </div>
+                    <p class="form-title" style="border-bottom:1px solid #93d2d2;">Cette description ne vous parait
+                        pas
+                        satisfaisantes vous vouller la modifier? </p>
+                    <textarea id="novDescription" placeholder="Taper içi votre nouvelle description"></textarea>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary">Enregister</button>
+                    <button type="button" class="btn btn-outline-warning" data-toggle="modal"
+                        (click)="affirmerModif()">Modifier</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="openModalSignaler()">Signaler</button>
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal"
+                        (click)="close()">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal affirmer modification  -->
+    <div class="modal fade" id="modif" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <h6 style="text-align: center;" id="messageModif"></h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="mod" class="btn btn-outline-success"
+                        (click)="modifier()">Modifier</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- modal de signale -->
+    <div class="modal fade" id="signalModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="signalerForm" (ngSubmit)="siganler()">
+                        <p class="form-title" style="border-bottom:1px solid #93d2d2;">Ce post vous dérange?Dites
+                            pourquoi:
+                        </p>
+                        <textarea id="resSignale" name="resSignale" formControlName="resSignale"
+                            placeholder="Taper içi vos reproches"></textarea>
+                        <span class="focus-input100"></span>
+                        <div class="alert alert-danger" *ngIf="resSignale.touched && resSignale.invalid">
+                            <div *ngIf="resSignale.errors.required">
+                                Veuillez tapper vos reproches.
+                            </div>
+                        </div>
+                        <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+                        <div class="modal-footer">
+                            <button type="button" id="sign" class="btn btn-outline-dark" type="submit"
+                                [disabled]="signalerForm.invalid">Signaler</button>
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- confirme supprimer -->
+
+    <!--Modal: modalConfirmDelete-->
+    <div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+            <!--Content-->
+            <div class="modal-content text-center">
+                <!--Header-->
+                <div class="modal-header d-flex justify-content-center">
+                    <p class="heading">Are you sure?</p>
+                </div>
+
+                <!--Body-->
+                <div class="modal-body">
+
+                    <i class="fa fa-times fa-4x animated rotateIn"></i>
+
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer flex-center">
+                    <a href="" class="btn  btn-outline-danger" (click)="supprimerPost()">Yes</a>
+                    <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">No</a>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div>
+    <!--Modal: modalConfirmDelete-->
+
+</body>

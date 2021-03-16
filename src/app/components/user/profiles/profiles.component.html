@@ -1,0 +1,342 @@
+<app-nav-visiteur *ngIf="!isLoggedIn"></app-nav-visiteur>
+<body class="">
+
+
+    <div id="backimage" class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+        style="min-height: 600px;  background-size: cover; background-position: center top;">
+        <!-- Mask -->
+        <span class="mask bg-gradient-default opacity-8"></span>
+        <!-- Header container -->
+        <div class="container-fluid d-flex align-items-center">
+            <div style="width: 100%;">
+                <div class="col-lg-7 col-md-10">
+                    <h1 class="display-2 text-white">{{nomUser}}</h1>
+                    <p class="text-white mt-0 mb-5">Ici c'est le profile de {{nomUser}} vous y trouverez ces postes</p>
+                    <!-- <a href="#!" class="btn btn-info">Edit profile</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+        <div class="row">
+            <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+                <div class="card card-profile shadow">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 order-lg-2">
+                            <div class="card-profile-image">
+                                <a>
+                                    <img [src]="imageUser" class="rounded-circle">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                        <div class="d-flex justify-content-between" style="color: white;" *ngIf="isLoggedIn">
+                            <a id="abonne" (click)="sabonner()" class="btn btn-sm btn-info mr-4">S'abonner</a>
+                            <a id="desabonne" (click)="desabonner()" class="btn btn-sm btn-info mr-4">Se désabonner</a>
+                            <a id="signal" (click)="openModalSignalerUser()" class="btn btn-sm btn-default float-right">signaler</a>
+                            <a id="siganled" class="btn btn-sm btn-default float-right">signalé</a>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pt-md-4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                    <div>
+                                        <span class="heading">{{nbAbonements}}</span>
+                                        <span class="description">Abonné à</span>
+                                    </div>
+                                    <div>
+                                        <span class="heading">{{nbPosts}}</span>
+                                        <span class="description">Posts</span>
+                                    </div>
+                                    <div>
+                                        <span class="heading">{{nbSuivits}}</span>
+                                        <span class="description">Suivit par</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h3>
+                                {{nomUser}}<span class="font-weight-light">, {{age}}ans</span>
+                            </h3>
+                            <div class="h5 font-weight-300">
+                                <i class="ni location_pin mr-2"></i>{{adresse}}
+                            </div>
+                            <div class="h5 mt-4">
+                                <i class="ni business_briefcase-24 mr-2"></i>{{email}}
+                            </div>
+                            <div>
+                                <!-- <i class="ni education_hat mr-2"></i>{{tel}} -->
+                            </div>
+                            <!-- <hr class="my-4" />
+                            <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
+                                and records all of his own music.</p>
+                            <a href="#">Show more</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8 order-xl-1">
+                <div class="card bg-secondary shadow">
+                   
+                    <div class="card-header bg-white border-0">
+                        <div class="row align-items-center">
+                            <div class="col-8">
+                                <h3 id="titrePosts" class="mb-0">Posts</h3>
+                              
+                            </div>
+                            <!-- s -->
+                        </div>
+                    </div>
+
+                    <div id="gallery" class="card-body">
+                        <div class="row">
+                            <div class="col-md-4" *ngFor="let p of userPosts;">
+                                <div class="thumbnail">
+                                    <img [src]="p.post_id.imageP" (click)="openModel(p.post_id.id)" alt="ImagePost"
+                                        style="width:100%">
+                                    <div class="caption">
+                                        <p>{{p.post_id.titre}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Footer -->
+        <footer class="footer">
+
+        </footer>
+    </div>
+
+
+    <div class="modal" id="consulter">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #93d2d2;">
+                    <table>
+                        <td><img id="imageUser" src="" alt="Avatar" class="avatar" style="
+                        vertical-align: middle;
+                        width: 75px;
+                        height: 75px;
+                        border-radius: 50%;
+                        box-shadow: 0px 15px 16.83px 0.17px #93d2d2;
+                      "></td>
+                      <td>&nbsp;&nbsp;</td>
+                       <td> <h5 class="modal-title" id="username"></h5></td>
+                    </table>
+                    <button type="button" class="close" data-dismiss="modal"
+                        style="float: inline-end;">&times;</button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="signup-image">
+                        <figure>
+                            <div class="text-center">
+                                <div class="loader" id="loader"></div>
+                            </div>
+                            <p class="blockquote text-center" id="titreP"></p>
+                            <img id="imageP" src="" style="
+                            width: 445px;
+                            height: 300px;">
+                        </figure>
+                        <a class="region-image-link" id="regionP"></a>
+                    </div>
+
+                    <h2 class="form-title" style="border-bottom:1px solid #93d2d2;">Description</h2>
+                    <!-- <p style="border-bottom:1px solid black;"></p> -->
+                    <div class="form-group" id="descriptionP">
+                        <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                    </div>
+                    <p *ngIf="isLoggedIn" class="form-title" style="border-bottom:1px solid #93d2d2;">Cette description ne vous paniquez
+                        pas
+                        satisfaisantes vous vouller la modifier? </p>
+                    <textarea *ngIf="isLoggedIn" id="novDescription" placeholder="Taper içi votre nouvelle description"></textarea>
+
+
+                </div>
+                <div class="modal-footer" *ngIf="isLoggedIn">
+                    <button type="button" class="btn btn-outline-success" (click)="enregistrerPost()">Enregister</button>
+                    <button type="button" class="btn btn-outline-warning" data-toggle="modal"
+                        (click)="affirmerModif()">Modifier</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="openModalSignaler()">signaler</button>
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal"
+                        (click)="close()">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal affirmer modification  -->
+    <div class="modal fade" id="modif" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <h6 style="text-align: center;" id="messageModif"></h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="mod" class="btn btn-outline-success"
+                        (click)="modifier()">Modifier</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal" id="consulter">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #93d2d2;">
+                    <img id="imageUser" src="" alt="Avatar" class="avatar" style="
+                    vertical-align: middle;
+                    width: 75px;
+                    height: 75px;
+                    border-radius: 50%;
+                    box-shadow: 0px 15px 16.83px 0.17px #93d2d2;
+                  ">
+                    <h5 class="modal-title" id="username"></h5>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="signup-image">
+                        <figure>
+                            <div class="text-center">
+                                <div class="loader" id="loader"></div>
+                            </div>
+                            <img id="imageP" src="" style="
+                        width: 445px;
+                        height: 300px;">
+                        </figure>
+                        <a class="region-image-link" id="regionP"></a>
+                    </div>
+
+                    <h2 class="form-title" style="border-bottom:1px solid #93d2d2;">Description</h2>
+                    <!-- <p style="border-bottom:1px solid black;"></p> -->
+                    <div class="form-group" id="descriptionP">
+                        <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                    </div>
+                    <p class="form-title" style="border-bottom:1px solid #93d2d2;">Cette description ne vous paniquez
+                        pas
+                        satisfaisantes vous vouller la modifier? </p>
+                    <textarea id="novDescription" placeholder="Taper içi votre nouvelle description"></textarea>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary">Enregister</button>
+                    <button type="button" class="btn btn-outline-warning" data-toggle="modal"
+                        (click)="affirmerModif()">Modifier</button>
+                    <button type="button" class="btn btn-outline-danger" (click)="openModalSignaler()">signaler</button>
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal"
+                        (click)="close()">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal affirmer modification  -->
+    <div class="modal fade" id="modif" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <h6 style="text-align: center;" id="messageModif"></h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="mod" class="btn btn-outline-success"
+                        (click)="modifier()">Modifier</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- modal de signale -->
+    <div class="modal fade" id="signalModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="signalerForm" (ngSubmit)="signaler()">
+                        <p class="form-title" style="border-bottom:1px solid #93d2d2;">Ce post vous dérange?Dites
+                            pourquoi:
+                        </p>
+                        <textarea id="resSignale" name="resSignale" formControlName="resSignale"
+                            placeholder="Taper içi vos reproches"></textarea>
+                        <span class="focus-input100"></span>
+                        <div class="alert alert-danger" *ngIf="resSignale.touched && resSignale.invalid">
+                            <div *ngIf="resSignale.errors.required">
+                                Veuillez tapper vos reproches.
+                            </div>
+                        </div>
+                        <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+                        <div class="modal-footer">
+                            <button type="button" id="sign" class="btn btn-outline-dark" type="submit"
+                                [disabled]="signalerForm.invalid">signaler</button>
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- modal de signale user -->
+    <div class="modal fade" id="signalModalUser" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="signalerForm" (ngSubmit)="signalerUser()">
+                        <p class="form-title" style="border-bottom:1px solid #93d2d2;">Ce compte vous dérange?Dites
+                            pourquoi:
+                        </p>
+                        <textarea id="resSignale" name="resSignale" formControlName="resSignale"
+                            placeholder="Taper içi vos reproches"></textarea>
+                        <span class="focus-input100"></span>
+                        <div class="alert alert-danger" *ngIf="resSignale.touched && resSignale.invalid">
+                            <div *ngIf="resSignale.errors.required">
+                                Veuillez tapper vos reproches.
+                            </div>
+                        </div>
+                        <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+                        <div class="modal-footer">
+                            <button type="button" id="sign" class="btn btn-outline-dark" type="submit"
+                                [disabled]="signalerForm.invalid">signaler</button>
+                            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>

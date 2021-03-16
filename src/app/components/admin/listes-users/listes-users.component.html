@@ -1,0 +1,128 @@
+<app-admin></app-admin>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                    <th><span>User</span></th>
+                                    <th><span>Created</span></th>
+                                    <th class="text-center"><span>Status</span></th>
+                                    <th><span>Email</span></th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let u of usersListe;">
+                                    <td>
+                                        <img [src]="u.img" alt="UserImage">
+                                        <a (click)="openModel(u.id)" class="user-link">{{u.prenom}}
+                                            {{u.nom}}</a>
+                                        <span class="user-subhead">{{u.admin}}</span>
+                                    </td>
+                                    <td>{{u.created_at | date }}</td>
+                                    <td class="text-center">
+                                        <span class="label label-success">{{u.admin}}</span>
+                                    </td>
+                                    <td>
+                                        <a href="#">{{u.email}}</a>
+                                    </td>
+                                    <td class="text-right" *ngIf="u.admin==='user'">
+                                        <a (click)="valideUserToAdmin(u.id)" class="table-link" data-toggle="tooltip" data-placement="bottom" title="Valider Admin!">
+                                            <span class="fa-stack" style="color:rgb(1, 122, 94);">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a (click)="delete(u.id)" class="table-link danger" data-toggle="tooltip" data-placement="bottom" title="Supprimer!">
+                                            <span class="fa-stack" style="color:red;">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                    <td class="text-right" *ngIf="u.admin==='admin'">
+                                        <a (click)="unValideAdminToUser(u.id)" class="table-link" data-toggle="tooltip" data-placement="bottom" title="Valider User!">
+                                            <span class="fa-stack" style="color:rgb(68, 184, 172);">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-times fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                        <a (click)="delete(u.id)" class="table-link danger">
+                                            <span class="fa-stack" style="color:red;" data-toggle="tooltip" data-placement="bottom" title="Supprimer!">
+                                                <i class="fa fa-square fa-stack-2x"></i>
+                                                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- consulter User -->
+<div class="modal" id="consulter" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="card card-profile shadow">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 order-lg-2">
+                            <div class="card-profile-image">
+                                <a>
+                                    <img [src]="imageUser" (click)='goToUserProfile()' class="rounded-circle">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                        <button type="button" class="close" (click)="close()" data-dismiss="modal" style="float: inline-end;">&times;</button>
+                    </div>
+                    <div class="card-body pt-0 pt-md-4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                                    <div>
+                                        <span class="heading">{{nbAbonements}}</span>
+                                        <span class="description">Abonné à</span>
+                                    </div>
+                                    <div>
+                                        <span class="heading">{{nbPosts}}</span>
+                                        <span class="description">Posts</span>
+                                    </div>
+                                    <div>
+                                        <span class="heading">{{nbSuivits}}</span>
+                                        <span class="description">Suivit par</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <h3>
+                                {{nomUser}}<span class="font-weight-light">, {{age}}</span>
+                            </h3>
+                            <div class="h5 font-weight-300">
+                                <i class="ni location_pin mr-2"></i>{{adresse}}
+                            </div>
+                            <div class="h5 mt-4">
+                                <i class="ni business_briefcase-24 mr-2"></i>{{email}}
+                            </div>
+                            <div>
+                                <i class="ni education_hat mr-2"></i>{{tel}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

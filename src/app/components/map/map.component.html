@@ -1,0 +1,299 @@
+<div id="map-wrapper">
+    <div id="button-wrapper3">
+        <ul class="nav navbar-nav" style="float: left;">
+            <li *ngFor="let s of storysUser;let i=index" style="margin-left: 50px;">
+                <div *ngIf="backGStory.includes(s.id) ;then grey else blue"></div>
+                <ng-template #blue>
+                    <div id="backGStory" style=" vertical-align: middle; width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    background-color: DodgerBlue;
+                    box-shadow: 0px 15px 16.83px 0.17px #93d2d2;
+                    ">
+                        <img [src]="s.datePost.img" alt="Avatar" class="avatar" style="vertical-align: middle;
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;margin: 5px;
+                    " (click)="storys(s)">
+                    </div>
+                </ng-template>
+                <ng-template #grey>
+                    <div id="backGStory" style=" vertical-align: middle; width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    background-color: LightGray;
+                    box-shadow: 0px 15px 16.83px 0.17px #93d2d2;
+                    ">
+                        <img [src]="s.datePost.img" alt="Avatar" class="avatar" style="vertical-align: middle;
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;margin: 5px;
+                    " (click)="storys(s)">
+                    </div>
+                </ng-template>
+
+            </li>
+        </ul>
+
+        <ul style="float: right;margin: 5px;">
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control my-0 py-1" id="searchU" (keyup.enter)="searchUser()" type="search" placeholder="Chercher Utilisateur" style="color: white; background-color: rgba(30,144,255 ,0.7 );" aria-label="Search">
+                <button class="btn btn-search my-2 my-sm-0 " (click)="searchUser()" type="button">
+                    <span class="input-group-text red lighten-3" style="color: white;background-color: rgba(30,144,255 ,0.7 );"
+                        id="basic-text1">
+                        <i class="fa fa-search text-grey" aria-hidden="true"></i>
+                    </span>
+                </button>
+            </form>
+        </ul>
+    </div>
+
+
+
+    <div id="map" leaflet (leafletMapReady)="onMapReady($event)" [leafletOptions]="mapOptions">
+        <div id="button-wrapper" *ngIf="isLoggedIn">
+            <button type="button" class="btn btn-primary btn-circle btn-xl" style="z-index: 1001;font-size: xx-large;float: right;
+margin:50px; box-shadow: 0px 15px 16.83px 0.17px #93d2d2;" data-toggle="modal" data-target="#ajout">+</button>
+        </div>
+    </div>
+    <div id="button-wrapper2">
+        <form class="form-inline my-2 my-lg-0">
+            <div class="ui-widget">
+                <table>
+                    <td><input class="form-control my-0 py-1" id="search" (keyup.enter)="search()" class="form-control" type="search" placeholder="Les posts d'un utilisateur" aria-label="Recherche" style="color: white; background-color: rgba(30,144,255 ,0.9 );">
+                    </td>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
+
+<br>
+
+
+<!-- story modal -->
+<div class="modal" id="consulterS">
+    <div class="modal-dialog ">
+        <div class="modal-content" style="height: 600px;">
+            <div class="modal-header" style="background-color: #93d2d2;">
+                <table>
+                    <td><img id="imageUsers" (click)='goToUserProfileS()' src="" alt="Avatar" class="avatar" style="
+                    vertical-align: middle;
+                    width: 75px;
+                    height: 75px;
+                    border-radius: 50%;
+                    box-shadow: 0px 15px 16.83px 0.17px #93d2d2;
+                  "></td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td>
+                        <h5 class="modal-title" id="usernames"></h5>
+                    </td>
+                </table>
+                <button type="button" class="close" (click)="close()" data-dismiss="modal" style="float: inline-end;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- <div class="signup-image"> -->
+                <figure *ngFor="let s of storysUser;let i=index">
+                    <!-- <div class="text-center">
+                            <div class="loader" id="loader"></div>
+                        </div> -->
+                    <img id="imagePs" src="" style="
+                        width: 450px;
+                        height: 300px;">
+                </figure>
+                <a class="region-image-link" id="regionP"></a>
+                <!--  </div> -->
+                <div style="align-content: center;">
+                    <a id="ToPrevious" (click)="ToPrevious()" class="previous round">&#8249;</a>
+                    <a id="ToNext" (click)="ToNext()" class="next round">&#8250;</a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="consulter">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #93d2d2;">
+                <table>
+                    <td><img id="imageUser" (click)='goToUserProfile()' src="" alt="Avatar" class="avatar" style="
+                    vertical-align: middle;
+                    width: 75px;
+                    height: 75px;
+                    border-radius: 50%;
+                    box-shadow: 0px 15px 16.83px 0.17px #93d2d2;
+                  "></td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td>
+                        <h5 class="modal-title" id="username"></h5>
+                    </td>
+                </table>
+                <button type="button" class="close" (click)="close()" data-dismiss="modal" style="float: inline-end;">&times;</button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="signup-image">
+                    <figure>
+                        <div class="text-center">
+                            <div class="loader" id="loader"></div>
+                        </div>
+                        <p class="blockquote text-center" id="titreP"></p>
+                        <img id="imageP" src="" style="
+                        width: 445px;
+                        height: 300px;">
+                    </figure>
+                    <a class="region-image-link" id="regionP"></a>
+                </div>
+
+                <h2 class="form-title" style="border-bottom:1px solid #93d2d2;">Description</h2>
+                <!-- <p style="border-bottom:1px solid black;"></p> -->
+                <div class="form-group" id="descriptionP">
+                    <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                </div>
+                <p *ngIf="isLoggedIn" class="form-title" style="border-bottom:1px solid #93d2d2;">Cette description ne vous parait pas satisfaisantes vous vouller la modifier? </p>
+                <textarea *ngIf="isLoggedIn" id="novDescription" placeholder="Taper içi votre nouvelle description"></textarea>
+
+
+            </div>
+            <div id="actions" class="modal-footer" *ngIf="isLoggedIn">
+                <button type="button" class="btn btn-outline-success" (click)="enregistrerPost()">Enregister</button>
+                <button type="button" class="btn btn-outline-warning" data-toggle="modal" (click)="affirmerModif()">Modifier</button>
+                <!-- <button *ngIf="ifPostDontBelongsUser" type="button" class="btn btn-outline-danger" (click)="openModalSignaler()">Signaler</button>
+                <button *ngIf="ifPostBelongsUser" type="button" class="btn btn-outline-secondary" (click)="openModalSupprimer()">
+                    <i class="fa fa-trash-o fa-lg"></i> Supprimer</button> -->
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal affirmer modification  -->
+<div class="modal fade" id="modif" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <h6 style="text-align: center;" id="messageModif"></h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="mod" class="btn btn-outline-success" (click)="modifier()">Modifier</button>
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- modal de signale -->
+<div class="modal fade" id="signalModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="signalerForm" (ngSubmit)="siganler()">
+                    <p class="form-title" style="border-bottom:1px solid #93d2d2;">Ce post vous dérange?Dites pourquoi:
+                    </p>
+                    <textarea id="resSignale" name="resSignale" formControlName="resSignale" placeholder="Taper içi vos reproches"></textarea>
+                    <span class="focus-input100"></span>
+                    <div class="alert alert-danger" *ngIf="resSignale.touched && resSignale.invalid">
+                        <div *ngIf="resSignale.errors.required">
+                            Veuillez tapper vos reproches.
+                        </div>
+                    </div>
+                    <label data-error="wrong" data-success="right" for="orangeForm-name"></label>
+                    <div class="modal-footer">
+                        <button type="button" id="sign" class="btn btn-outline-dark" type="submit" [disabled]="signalerForm.invalid">Signaler</button>
+                        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- Modal ajout post -->
+<div id="ajout" class="modal fade" role="dialog">
+    <div class="modal-dialog  modal-lg">
+
+        <div class="modal-content" style="height: 900px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <app-ajout-post></app-ajout-post>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- confirme supprimer -->
+
+<!--Modal: modalConfirmDelete-->
+<div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Êtes-vous sûr ?</p>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+
+                <i class="fa fa-times fa-4x animated rotateIn"></i>
+
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+                <a class="btn  btn-outline-danger" (click)="supprimerPost()">Oui</a>
+                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Non</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: modalConfirmDelete-->
+
+
+<!--Modal: userInexistant-->
+<div class="modal fade" id="userInexistant" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center">
+                <p class="heading">Utilisateur introuvable !</p>
+            </div>
+
+
+            <!--Footer-->
+            <div class="modal-footer flex-center">
+                <a type="button" class="btn  btn-danger waves-effect" data-dismiss="modal">Fermer</a>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>

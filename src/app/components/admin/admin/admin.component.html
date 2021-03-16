@@ -1,0 +1,166 @@
+<div id="backimage" class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+    style="min-height: 50px;  background-size: cover; background-position: center top;">
+    <!-- Mask -->
+    <span class="mask bg-gradient-default opacity-8"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+            <div class="col-lg-7 col-md-10">
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--9">
+
+
+    <div class="">
+        <div class="card bg-secondary shadow">
+
+            <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                    <div class="col-8">
+                        <h3 class="mb-0">Tous les post</h3>
+                    </div>
+                    <div class="col-4 text-right" (click)="getnofis()">
+                        <li class="nav-item">
+                            <span class="badge badge-pill badge-primary" style="float:right;margin-bottom:-10px;">{{nbNotifa}}</span> <!-- your badge -->
+                            <i class="fa fa-bell"> <span class="sr-only"></span></i>
+                        </li>
+                        <!-- <button (click)="goToMap()" class="btn btn-primary">Visiter la map</button> -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="gallery">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="hovereffect">
+                        <div (click)="goToValiderPost()">
+                            <img class="img-responsive rounded-top rounded-bottom" style="height:200px;"
+                                src="../../../../assets/SidebarTemplate/images/bg_2.jpg" alt="ImagePost" />
+                            <div class="overlay">
+                                <h2>Posts à valider</h2>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="hovereffect">
+                        <div (click)="goToModifPost()">
+                            <img class="img-responsive rounded-top rounded-bottom" style="height:200px;"
+                                src="../../../../assets/SidebarTemplate/images/bg_2.jpg" alt="ImagePost" />
+                            <div class="overlay">
+                                <h2>Modifications à valider</h2>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="hovereffect">
+                        <div (click)="goToPostsSignales()">
+                            <img class="img-responsive rounded-top rounded-bottom" style="height:200px;"
+                                src="../../../../assets/SidebarTemplate/images/bg_2.jpg" alt="ImagePost" />
+                            <div class="overlay">
+                                <h2>Post signale à valider</h2>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <div class="hovereffect">
+                            <div (click)="goToUserSignales()">
+                                <img class="img-responsive rounded-top rounded-bottom" style="height:200px;"
+                                    src="../../../../assets/SidebarTemplate/images/bg_2.jpg" alt="ImagePost" />
+                                <div class="overlay">
+                                    <h2>User signale à valider</h2>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="hovereffect">
+                        <div (click)="goToUsers()">
+                            <img class="img-responsive rounded-top rounded-bottom" style="height:200px;"
+                                src="../../../../assets/SidebarTemplate/images/bg_2.jpg" alt="ImagePost" />
+                            <div class="overlay">
+                                <h2>Users</h2>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+    </footer>
+</div>
+
+
+<div class="modal" id="mNotifs">
+    <div class="modal-dialog ">
+        <div class="modal-content" >
+            <div class="modal-header" style="background-color: #93d2d2;">
+                <h5 class="modal-title">Notifications</h5>
+                <button type="button" class="close" (click)="close()" data-dismiss="modal"
+                    style="float: inline-end;">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="nofisa.length > 0;then nofisAff else noNofis"></div>
+                <ng-template #noNofis>
+                    <div class="alert alert-warning">Pas de Notifications</div>
+                </ng-template>
+
+                <ng-template #nofisAff>
+
+                    <div class="padding">
+                        <div>
+                            <div class="list list-row block" *ngFor="let n of nofisa;let i=index">
+                                <div class="list-item" data-id="19">
+                                    <div class="list-item" data-id="19">
+                                        <div id="toNotif" >
+                                          <div (click)="gotToNotif(n)" *ngIf="n.action=='validerPost'" class="alert alert-success alert-dismissible fade show">
+                                            <button   type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                                              <i class="nc-icon nc-simple-remove"></i>
+                                            </button>
+                                            <span >
+                                              <b> Post à valider - </b> {{i+1}} : {{n.notification}}</span>
+                                          </div>
+                                          <div (click)="gotToNotif(n)"  *ngIf="n.action=='modifierPost'" class="alert alert-warning alert-dismissible fade show">
+                                            <button  type="button" aria-hidden="true"  class="close" data-dismiss="alert" aria-label="Close">
+                                              <i class="nc-icon nc-simple-remove"></i>
+                                            </button>
+                                            <span >
+                                              <b> Modification à valider - </b>{{i+1}} : {{n.notification}}</span>
+                                          </div>
+                                          <div (click)="gotToNotif(n)" *ngIf="n.action=='signalerPost'" class="alert alert-danger alert-dismissible fade show">
+                                            <button  type="button" aria-hidden="true"  class="close" data-dismiss="alert" aria-label="Close">
+                                              <i class="nc-icon nc-simple-remove"></i>
+                                            </button>
+                                            <span >
+                                              <b> Signale post à valider - </b>{{i+1}} : {{n.notification}}</span>
+                                          </div>
+                                          <div (click)="gotToNotif(n)" *ngIf="n.action=='signalerUser'" class="alert alert-danger alert-dismissible fade show">
+                                            <button  type="button" aria-hidden="true"  class="close" data-dismiss="alert" aria-label="Close">
+                                              <i class="nc-icon nc-simple-remove"></i>
+                                            </button>
+                                            <span >
+                                              <b> Signale user à valider - </b>{{i+1}} : {{n.notification}}</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+
+        </div>
+    </div>
+</div>
+
